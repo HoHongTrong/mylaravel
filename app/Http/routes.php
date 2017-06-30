@@ -106,3 +106,20 @@ Route::get('xoa-cot',function (){
   });
 });
 
+Route::get('schema/create/cate',function (){
+  Schema::create('category',function ($table){
+    $table->increments('id');
+    $table->string('name');
+    $table->timestamps();
+  });
+});
+Route::get('schema/create/product',function (){
+  Schema::create('product',function ($table){
+    $table->increments('id');
+    $table->string('name');
+    $table->integer('price');
+    $table->integer('cate_id')->unsigned();
+    $table->foreign('cate_id')->reference('id')->on('category');
+    $table->timestamps();
+  });
+});
