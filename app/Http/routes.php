@@ -91,7 +91,7 @@ Route::get('schema/rename',function (){
 //xoa bảng
 Route::get('xoa-bang',function(){
 //  Schema::drop('bang_text');
-    Schema::dropIfExists('bang_text');
+    Schema::dropIfExists('product');
 });
 //thay doi thuoc tinh của cột tên môn học varcha(255) thành varchar(100)
 Route::get('doi-thuoc-tinh',function (){
@@ -119,7 +119,7 @@ Route::get('schema/create/product',function (){
     $table->string('name');
     $table->integer('price');
     $table->integer('cate_id')->unsigned();
-    $table->foreign('cate_id')->reference('id')->on('category');
+    $table->foreign('cate_id')->references('id')->on('category');
     $table->timestamps();
   });
 });
