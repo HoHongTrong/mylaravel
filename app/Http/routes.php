@@ -123,3 +123,39 @@ Route::get('schema/create/product',function (){
     $table->timestamps();
   });
 });
+
+
+
+Route::get('query/select-data',function (){
+    $da = DB::table('product')->get();
+    echo "<pre>";
+    print_r($da);
+    echo "</pre>";
+});
+Route::get('query/select-column-data',function (){
+    $da = DB::table('product')->select('name')->get();
+    echo "<pre>";
+    print_r($da);
+    echo "</pre>";
+});
+Route::get('query/orderBy',function(){
+    $data = DB::table('product')->orderBy('id','DESC')->get();
+    echo "<pre>";
+    print_r($data);
+    echo "</pre>";
+});
+Route::get('query/limit',function(){
+    $data = DB::table('product')->skip(1)->take(3)->get();
+    echo "<pre>";
+    print_r($data);
+    echo "</pre>";
+});
+
+
+//kết bảng lưu ý không có khóa ngoại
+Route::get('query/join',function(){
+    $data = DB::table('news')->join('cate_news','news.cate_id','=','cate_news.id')->get();
+    echo "<pre>";
+    print_r($data);
+    echo "</pre>";
+});
