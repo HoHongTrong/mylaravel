@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Http\Requests\RegisterRequest;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -69,4 +71,15 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+  public function getRegister(){
+      return view('auth.register');
+  }
+  public function postRegister(RegisterRequest $request){
+    $thanhvien = new User();
+    $thanhvien->name =$request->name;
+    $thanhvien->email =$request->email;
+    $thanhvien->password =Hash::make($request->password);
+    $thanhvien->remember_token= $request->_token;
+    $thanhvien->save();
+  }
 }
